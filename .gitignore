@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.h5
+*.csv
+*.log
+.env
+
+# Data
+data
+
+# Models
+
+# Jupyter
+.ipynb_checkpoints/
+
