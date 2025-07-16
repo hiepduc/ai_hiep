@@ -68,7 +68,7 @@ history = model.fit(X_train, y_train,
                     validation_data=(X_val, y_val),
                     epochs=EPOCHS,
                     batch_size=BATCH_SIZE)
-model.save("cnn_lstm_model_pm25_nw_120input.h5")
+model.save("cnn_lstm_model_pm25_sw_120input.h5")
 
 # === STEP 8: PREDICT & INVERSE SCALE ===
 y_pred = model.predict(X_val)

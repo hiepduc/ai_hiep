@@ -1,0 +1,39 @@
+
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "Station": "PM2.5_LIVERPOOL",
+        "Region": "SW Sydney"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [150.92, -33.92]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Station": "PM2.5_PARRAMATTA_NORTH",
+        "Region": "NW Sydney"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [151.01, -33.81]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "Station": "PM2.5_MUSWELLBROOK",
+        "Region": "Upper Hunter"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [150.88, -32.27]
+      }
+    }
+  ]
+}

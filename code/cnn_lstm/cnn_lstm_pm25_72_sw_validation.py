@@ -22,8 +22,8 @@ df = pd.read_csv(INPUT_FILE, index_col=0, parse_dates=True)
 # === STEP 2: SCALING ===
 scaler = MinMaxScaler()
 scaled_data = scaler.fit_transform(df)
-joblib.dump(scaler, "pm25_sw_scaler.save")
-joblib.dump(df.columns.tolist(), "pm25_sw_columns.save")  # Save feature order
+joblib.dump(scaler, "pm25_sw_scaler_72.save")
+joblib.dump(df.columns.tolist(), "pm25_sw_columns_72.save")  # Save feature order
 n_features = scaled_data.shape[1]
 
 # === STEP 3: CREATE SEQUENCES ===
@@ -113,7 +113,7 @@ test_index = pd.date_range(start='2025-01-01', periods=len(y_test_inv), freq='H'
 df_actual = pd.DataFrame(y_test_inv, columns=[s + "_actual" for s in site_names], index=test_index)
 df_pred = pd.DataFrame(y_pred_inv, columns=[s + "_predicted" for s in site_names], index=test_index)
 df_combined = pd.concat([df_actual, df_pred], axis=1)
-df_combined.to_csv("test_predictions_vs_actual.csv")
+df_combined.to_csv("test_predictions_vs_actual_sw.csv")
 
 # === STEP 10: Dashboard-style interactive plot using Plotly
 import plotly.graph_objects as go
@@ -131,7 +131,7 @@ for i, site in enumerate(sites_to_plot):
     fig.add_trace(go.Scatter(x=test_index, y=predicted, name=f"{site} Predicted", mode='lines'), row=i+1, col=1)
 
 fig.update_layout(height=300*len(sites_to_plot), title_text="PM2.5 Forecast vs Actual on Test Set", showlegend=True)
-fig.write_html("test_forecast_dashboard.html")
+fig.write_html("test_forecast_dashboard_sw.html")
 print("✅ Interactive dashboard saved to test_forecast_dashboard.html")
 
 

@@ -23,7 +23,10 @@ site_coords = {
     "BRINGELLY": {"lat": -33.93, "lon": 150.73},
     "SINGLETON": {"lat": -32.57, "lon": 151.178},
     "MUSWELLBROOK": {"lat": -32.261, "lon": 150.89},
-    "MERRIWA": {"lat": -32.139, "lon": 150.356}
+    "MERRIWA": {"lat": -32.139, "lon": 150.356},
+    "ALBION_PARK_SOUTH": {"lat": -34.567, "lon": 150.80},
+    "KEMBLA_GRANGE": {"lat": -34.47, "lon": 150.796},
+    "WOLLONGONG": {"lat": -34.424, "lon": 150.893}
 }
 
 # ------------------------------
@@ -44,8 +47,11 @@ def fetch_pm25_data(start_date_str, end_date_str, region):
 
     region_sites = {
         "SW": ["BARGO", "BRINGELLY", "CAMPBELLTOWN WEST", "LIVERPOOL"],
+        "CE": ["EARLWOOD", "MACQUARIE PARK", "RANDWICK", "ROZELLE"],
         "NW": ["PARRAMATTA NORTH", "RICHMOND", "ROUSE HILL"],
-        "UH": ["MUSWELLBROOK", "SINGLETON", "MERRIWA"]
+        "UH": ["MUSWELLBROOK", "SINGLETON", "MERRIWA"],
+        "LH": ["BERESFIELD", "NEWCASTLE", "WALLSEND"],
+        "ILLAWARRA": ["ALBION PARK SOUTH", "KEMBLA GRANGE", "WOLLONGONG"]
     }
 
     parameter_id = param_map["PM2.5"]
@@ -124,7 +130,7 @@ main_col, map_col = st.columns([5, 1])
 # --- Station Map ---
 with map_col:
     st.markdown("### 🧭 Station Map")
-    fmap = folium.Map(location=[-33.8, 150.8], zoom_start=8)
+    fmap = folium.Map(location=[-33.9, 151.0], zoom_start=8)
     for site, loc in site_coords.items():
         folium.Marker(
             location=[loc["lat"], loc["lon"]],
@@ -137,7 +143,7 @@ with map_col:
 with st.sidebar:
     st.header("🔧 Model Configuration")
     model_type = st.selectbox("Model Type", ["CNN_LSTM", "CNN_LSTM_MET (coming)", "CNN_LSTM_TRANSFORMER (coming)"])
-    regions_selected = st.multiselect("Select Regions", ["SW", "NW", "UH"], default=["SW"])
+    regions_selected = st.multiselect("Select Regions", ["SW", "NW", "CE", "UH","LH","ILLAWARRA"], default=["SW"])
     n_input = st.radio("Model Input Hours", [72, 120], horizontal=True)
     forecast_days = st.slider("Forecast Horizon (days)", 1, 7, 3)
     start_date = st.date_input("Start Date", datetime(2025, 7, 1))
