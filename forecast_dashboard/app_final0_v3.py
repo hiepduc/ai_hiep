@@ -123,7 +123,7 @@ def run_forecast(df, model, scaler, feature_columns, n_input, forecast_hours):
 # App Layout
 # ------------------------------
 st.set_page_config(layout="wide")
-st.title("🌫️ PM2.5 Forecast Dashboard")
+st.title("🌫️ PM2.5 Forecast Using Deep Learning (DL) Dashboard")
 
 main_col, map_col = st.columns([5, 1])
 
@@ -142,7 +142,7 @@ with map_col:
 # --- Sidebar ---
 with st.sidebar:
     st.header("🔧 Model Configuration")
-    model_type = st.selectbox("Model Type", ["CNN_LSTM", "CNN_LSTM_MET (coming)", "CNN_LSTM_TRANSFORMER (coming)"])
+    model_type = st.selectbox("Model Type", ["CNN_LSTM", "CNN_LSTM_MET (coming)", "VMD_CNN_LSTM (coming)", "CNN_LSTM_TRANSFORMER (coming)"])
     regions_selected = st.multiselect("Select Regions", ["SW", "NW", "CE", "UH","LH","ILLAWARRA"], default=["SW"])
     n_input = st.radio("Model Input Hours", [72, 120], horizontal=True)
     forecast_days = st.slider("Forecast Horizon (days)", 1, 7, 3)
