@@ -1,0 +1,82 @@
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://192.168.144.132:8501
+
+2025-07-17 14:02:12.461671: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-07-17 14:03:32.647694: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  SSE4.1 SSE4.2 AVX AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning: 'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+  warnings.warn(
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+
+/home/duch/miniconda3/lib/python3.9/site-packages/sklearn/metrics/_regression.py:492: FutureWarning:
+
+'squared' is deprecated in version 1.4 and will be removed in 1.6. To calculate the root mean squared error, use the function'root_mean_squared_error'.
+

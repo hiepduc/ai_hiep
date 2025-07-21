@@ -151,13 +151,16 @@ with st.sidebar:
 
 # --- Main Forecast Logic ---
 forecast_hours = forecast_days * 24
-all_forecasts = []
-all_observed = []
-all_errors = []
+#all_forecasts = []
+#all_observed = []
+#all_errors = []
 
 with main_col:
     if st.button("🚀 Run Forecast"):
         for region in regions_selected:
+            all_forecasts = []
+            all_observed = []
+            all_errors = []
             st.subheader(f"🔍 Region: {region}")
 
             df_obs = fetch_pm25_data(start_date.strftime("%Y-%m-%d"), end_date.strftime("%Y-%m-%d"), region)
@@ -217,42 +220,42 @@ with main_col:
                 st.plotly_chart(fig, use_container_width=True)
 
 
-        # Combined Graph
-        if all_forecasts:
-            st.markdown("### 🌍 Combined Forecast and Observed")
-            combined_df = pd.concat(all_forecasts)
-            combined_obs = pd.concat(all_observed)
+            # Combined Graph
+            if all_forecasts:
+                st.markdown("### 🌍 Combined Forecast and Observed")
+                combined_df = pd.concat(all_forecasts)
+                combined_obs = pd.concat(all_observed)
 
-            # Combine historical, forecast, and observed future
-            combined_future_obs = []
-            for forecast_df, df_obs in zip(all_forecasts, all_observed):
-                region_sites = forecast_df.columns.drop("Region")
-                future_start = forecast_df.index[0]
-                future_end = forecast_df.index[-1]
-                region = forecast_df["Region"].iloc[0]
+                # Combine historical, forecast, and observed future
+                combined_future_obs = []
+                for forecast_df, df_obs in zip(all_forecasts, all_observed):
+                    region_sites = forecast_df.columns.drop("Region")
+                    future_start = forecast_df.index[0]
+                    future_end = forecast_df.index[-1]
+                    region = forecast_df["Region"].iloc[0]
 
-                # Fetch actual future observations again (safer for reindexing)
-                df_future_obs = fetch_pm25_data(future_start.strftime("%Y-%m-%d"),
-                                                 future_end.strftime("%Y-%m-%d"), region)
-                df_future_obs = df_future_obs[region_sites].reindex(forecast_df.index)
-                combined_future_obs.append(df_future_obs)
+                    # Fetch actual future observations again (safer for reindexing)
+                    df_future_obs = fetch_pm25_data(future_start.strftime("%Y-%m-%d"),
+                                                     future_end.strftime("%Y-%m-%d"), region)
+                    df_future_obs = df_future_obs[region_sites].reindex(forecast_df.index)
+                    combined_future_obs.append(df_future_obs)
 
-            combined_obs_long = pd.concat(all_observed).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Observed")
-            combined_forecast_long = pd.concat([df.drop(columns="Region") for df in all_forecasts]).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Forecast")
-            combined_futureobs_long = pd.concat(combined_future_obs).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Observed Future")
+                combined_obs_long = pd.concat(all_observed).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Observed")
+                combined_forecast_long = pd.concat([df.drop(columns="Region") for df in all_forecasts]).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Forecast")
+                combined_futureobs_long = pd.concat(combined_future_obs).melt(ignore_index=False, var_name="Site", value_name="PM2.5").assign(Type="Observed Future")
 
-            all_long = pd.concat([combined_obs_long, combined_forecast_long, combined_futureobs_long])
-            all_long["datetime"] = all_long.index
+                all_long = pd.concat([combined_obs_long, combined_forecast_long, combined_futureobs_long])
+                all_long["datetime"] = all_long.index
 
-            fig = px.line(all_long, x="datetime", y="PM2.5", color="Site", line_dash="Type", title="Combined PM2.5 Forecast vs Observed + Future")
-            st.plotly_chart(fig, use_container_width=True)
+                fig = px.line(all_long, x="datetime", y="PM2.5", color="Site", line_dash="Type", title="Combined PM2.5 Forecast vs Observed + Future")
+                st.plotly_chart(fig, use_container_width=True)
 
-            # Download CSV
-            csv = combined_df.drop(columns="Region").to_csv().encode("utf-8")
-            st.download_button("📥 Download Forecast CSV", csv, file_name="pm25_forecast.csv")
+                # Download CSV
+                csv = combined_df.drop(columns="Region").to_csv().encode("utf-8")
+                st.download_button("📥 Download Forecast CSV", csv, file_name="pm25_forecast.csv", key=region)
 
-        if all_errors:
-            st.markdown("### 🧪 Forecast Accuracy")
-            err_df = pd.DataFrame(all_errors)
-            st.dataframe(err_df.style.format({"MAE": "{:.2f}", "RMSE": "{:.2f}"}))
+            if all_errors:
+                st.markdown("### 🧪 Forecast Accuracy")
+                err_df = pd.DataFrame(all_errors)
+                st.dataframe(err_df.style.format({"MAE": "{:.2f}", "RMSE": "{:.2f}"}))
 
