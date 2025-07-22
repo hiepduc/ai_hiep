@@ -136,8 +136,10 @@ def run_forecast(df, model, scaler, feature_columns, n_input, forecast_hours, mo
 
     for _ in range(forecast_hours):
         # Prepare input sample
-        n_subseq = 6     # number of subsequences
-        n_steps = n_input // n_subseq  # length of each subsequence
+        #n_subseq = 6     # number of subsequences
+        #n_steps = n_input // n_subseq  # length of each subsequence
+        n_subseq = n_input // 12
+        n_steps = n_input // n_subseq
         if model_type.lower() == "vmd_cnn_lstm":
             try:
                 if n_input % n_subseq != 0:
@@ -198,9 +200,10 @@ with map_col:
 # --- Sidebar ---
 with st.sidebar:
     st.header("🔧 Model Configuration")
-    model_type = st.selectbox("Model Type", ["CNN_LSTM", "CNN_LSTM_BNN (coming)", "VMD_CNN_LSTM", "VMD_CNN_LSTM_ATTENTION"])
+    model_type = st.selectbox("Model Type", ["CNN_LSTM", "CNN_LSTM_BNN (coming)", "VMD_CNN_LSTM", "VMD_CNN_LSTM_ATTENTION", "CNN_LSTM_ATTENTION"])
     regions_selected = st.multiselect("Select Regions", ["SW", "NW", "CE", "UH","LH","ILLAWARRA"], default=["SW"])
     n_input = st.radio("Model Input Hours", [72, 120], horizontal=True)
+    st.write("Selected input hours :", n_input)
     forecast_days = st.slider("Forecast Horizon (days)", 1, 7, 3)
     start_date = st.date_input("Start Date", datetime(2025, 7, 1))
     end_date = st.date_input("End Date", datetime(2025, 7, 10))
@@ -227,6 +230,11 @@ with main_col:
                 st.warning(f"Not enough past data for {region}. Need at least {n_input} hours.")
                 continue
             # Check for empty or incomplete data
+            from datetime import datetime
+
+            # If these are coming from Streamlit widgets or user input:
+            start_date = pd.to_datetime(start_date)
+            end_date = pd.to_datetime(end_date)
             expected_hours = (end_date - start_date).days * 24
             if df_obs.empty or df_obs.shape[0] < expected_hours - 24:
                 st.warning(f"⚠️ Insufficient data for region **{region}** between {start_date} and {end_date}. The predicted results may not be correct.")
@@ -240,6 +248,10 @@ with main_col:
                     model = load_model(f"models/cnn_lstm_vmd_model_pm25_{region.lower()}_{n_input}input.h5")
                     scaler = joblib.load(f"scalers/pm25_vmd_{region.lower()}_scaler_{n_input}.save")
                     features = joblib.load(f"scalers/pm25_vmd_{region.lower()}_columns_{n_input}.save")
+                elif model_type == "CNN_LSTM_ATTENTION":
+                    model = load_model(f"models/cnn_lstm_attention_model_pm25_{region.lower()}_{n_input}input.h5")
+                    scaler = joblib.load(f"scalers/pm25_cnn_lstm_attention_{region.lower()}_scaler_{n_input}.save")
+                    features = joblib.load(f"scalers/pm25_cnn_lstm_attention_{region.lower()}_columns_{n_input}.save")
                 else:
                     st.info(f"Model type '{model_type}' is a placeholder.")
                     continue
@@ -285,7 +297,7 @@ with main_col:
 
                 return df_vmd.dropna()
 
-            if model_type == "CNN_LSTM":
+            if model_type == "CNN_LSTM" or model_type == "CNN_LSTM_ATTENTION":
                 df_obs = df_obs[features].dropna()
                 forecast_df = run_forecast(df_obs, model, scaler, features, n_input, forecast_hours, model_type)
                 forecast_df["Region"] = region
